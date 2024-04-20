@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 
 # Thư mục chứa các file nhạc
-MUSIC_DIR = "D:\code\CNPM\music"
+MUSIC_DIR = "D:\code\CNPM\music"#chuyển path theo thư mục lưu music
 
 # Route mặc định: hiển thị danh sách các bài hát
 @app.route('/')
