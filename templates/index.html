@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+</head>
+<body>
+    <h1>Danh sách các bài hát</h1>
+    <ul>
+        {% for song in songs %}
+        <li>
+            {{ song }}
+            <a href="{{ url_for('play', song=song) }}">Phát</a>
+            <a href="{{ url_for('download', song=song) }}">Tải xuống</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('search') }}">
+        <input type="text" name="query" placeholder="Tìm kiếm...">
+        <button type="submit">Tìm kiếm</button>
+    </form>
+</body>
+</html>
