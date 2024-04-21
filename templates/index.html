@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Player</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='1.css') }}">
 </head>
 <body>
-    <h1>Danh sách các bài hát</h1>
-    <ul>
-        {% for song in songs %}
-        <li>
-            {{ song }}
-            <a href="{{ url_for('play', song=song) }}">Phát</a>
-            <a href="{{ url_for('download', song=song) }}">Tải xuống</a>
-        </li>
-        {% endfor %}
-    </ul>
-    <form action="{{ url_for('search') }}">
+    <form action="{{ url_for('search') }}" style="margin-top: 20px;">
         <input type="text" name="query" placeholder="Tìm kiếm...">
         <button type="submit">Tìm kiếm</button>
     </form>
+
+    <h1>Danh sách các bài hát</h1>
+    <ul>
+        {% for song in songs_info %}
+        <li>
+            {{ song.song_name }} - {{ song.artist_name }}
+            <a href="{{ url_for('start_playing', filename=song.song_name + ' - ' + song.artist_name + '.mp3') }}">Phát</a>
+            {% if is_playing and current_song == (song.song_name + ' - ' + song.artist_name + '.mp3') %}
+            <a href="{{ url_for('stop_playing') }}">Dừng</a>
+            {% endif %}
+            <a href="{{ url_for('download', song=song.song_name + ' - ' + song.artist_name + '.mp3') }}">Tải xuống</a>
+        </li>
+        {% endfor %}
+    </ul>          
 </body>
 </html>
